@@ -1,0 +1,83 @@
+﻿<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+    <title></title>
+
+
+    <script>
+        function messageBox(message) {
+            alert(message);
+        }
+    </script>
+</head>
+<body onload="loadImage()">
+    <div id="report" style="padding-left: 5%;width:90%;">
+        <label for="comments" style="font-style: oblique;font-weight: bold;">提示：</label>
+    </div>
+    <div>
+        <label>InvokeScript:</label>
+        <textarea id="comments" rows="4"></textarea>
+    </div>
+    <div>
+        <label>直接写入内容:</label>
+        <textarea id="nameDiv"></textarea>
+    </div>
+    <div>
+        <button onclick="cc()">
+            javascript访问C#代码
+        </button>
+        <input type="button" onclick="Ceshi()" value="js调用后台代码" />
+        <p></p>
+    </div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div>
+        <img id="save" onclick="saved(this)" class='right-bottom' src="save.png" />
+        <img id="save" onclick="invokeCS()" class='right-left' src="save.png" />
+
+    </div>
+
+    <script>
+        function setDate(a, b, c) {
+            alert(a);
+            alert(b);
+            alert(c);
+
+            var text = document.getElementById('comments');
+            text.innerText = a;
+        }
+
+        function cc() {
+            window.external.MyMessageBox('javascript访问C#代码');
+        }
+    </script>
+    <script type="text/javascript" language="javascript">
+        function Ceshi() {
+            window.external.notify('这是来自JavaScript的消息');
+        }
+    </script>
+    <script language="javascript">
+        function invokeCS() {
+            var a = "<%=SS()%>";
+
+            var text = document.getElementById('comments');
+            text.innerText = a;
+        }
+        invokeCS();
+    </script>
+    <script language="javascript">
+        var s = "<%=CsharpVoid(‘www.baidu.com’)%>";
+        document.write(s);
+        alert(s);
+    </script>
+    <script language="javascript">
+        document.write("<%CsharpVoid();%>");
+    </script>
+
+</body>
+</html>
